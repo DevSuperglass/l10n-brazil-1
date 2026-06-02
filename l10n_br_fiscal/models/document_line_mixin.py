@@ -219,6 +219,8 @@ class FiscalDocumentLineMixin(models.AbstractModel):
         "ii_customhouse_charges",
     )
     def _compute_fiscal_amounts(self):
+        if self.env.context.get('module'):
+            return
         for record in self:
             round_curr = record.currency_id or self.env.ref("base.BRL")
 
@@ -317,6 +319,8 @@ class FiscalDocumentLineMixin(models.AbstractModel):
         "ind_final",
     )
     def _compute_fiscal_tax_ids(self):
+        if self.env.context.get('module'):
+            return
         for line in self:
             if line.fiscal_operation_line_id:
                 mapping_result = line.fiscal_operation_line_id.map_fiscal_taxes(
@@ -428,6 +432,8 @@ class FiscalDocumentLineMixin(models.AbstractModel):
         """
         Compute base, percent, value... tax fields for ICMS, IPI, PIS, COFINS... taxes.
         """
+        if self.env.context.get('module'):
+            return
         null_mask = None
         for line in self.filtered(lambda line: not line._is_imported()):
             if null_mask is None:
