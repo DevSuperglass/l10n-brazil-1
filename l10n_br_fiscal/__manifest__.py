@@ -58,7 +58,7 @@
         "data/l10n_br_fiscal.nbm.csv",
         "data/l10n_br_fiscal.nbs.csv",
         "data/l10n_br_fiscal.cest.csv",
-        "data/l10n_br_fiscal_icms_tax_definition_data.xml",
+        # "data/l10n_br_fiscal_icms_tax_definition_data.xml",
         # Views
         "views/tax_classification.xml",
         "views/legal_nature_view.xml",
