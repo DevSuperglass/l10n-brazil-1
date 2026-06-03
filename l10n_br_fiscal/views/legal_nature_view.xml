@@ -4,6 +4,7 @@
         <field name="name">l10n_br_fiscal.legal.nature.search</field>
         <field name="model">l10n_br_fiscal.legal.nature</field>
         <field name="arch" type="xml">
+        <field name="inherit_id" eval="False"/>
             <search string="Legal Nature">
                 <field name="code" />
                 <field name="name" />
