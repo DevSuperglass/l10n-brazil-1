@@ -317,6 +317,8 @@ class FiscalDocumentLineMixin(models.AbstractModel):
         "ind_final",
     )
     def _compute_fiscal_tax_ids(self):
+        if self.env.context.get("module"):
+            return
         for line in self:
             if line.fiscal_operation_line_id:
                 mapping_result = line.fiscal_operation_line_id.map_fiscal_taxes(
@@ -429,6 +431,8 @@ class FiscalDocumentLineMixin(models.AbstractModel):
         Compute base, percent, value... tax fields for ICMS, IPI, PIS, COFINS... taxes.
         """
         null_mask = None
+        if self.env.context.get("module"):
+            return
         for line in self.filtered(lambda line: not line._is_imported()):
             if null_mask is None:
                 null_mask = self._build_null_mask_dict()

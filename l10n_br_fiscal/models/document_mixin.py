@@ -156,7 +156,8 @@ class FiscalDocumentMixin(models.AbstractModel):
         It handles cases where delivery costs (freight, insurance, other) are
         defined at the document total level rather than per line.
         """
-
+        if self.env.context.get("module"):
+            return
         fields = self._get_amount_fields()
         for doc in self.filtered(lambda m: m.fiscal_operation_id):
             values = {key: 0.0 for key in fields}
