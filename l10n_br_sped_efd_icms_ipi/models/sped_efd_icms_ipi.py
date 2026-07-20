@@ -4645,10 +4645,15 @@ class RegistroK235(models.Model):
         # We look for all done stock moves that were raw materials for this MO.
         # We only report storable products (type='product'), ignoring consumables/services.
         return [
-            ("raw_material_production_id", "=", parent_record.id),
+            ("picking_id", "in", parent_record.plate_picking_id.ids),
             ("state", "=", "done"),
-            ("product_id.type", "=", "product"),
+            ("product_id.type", "=", "product")
         ]
+        # return [
+        #     ("raw_material_production_id", "=", parent_record.id),
+        #     ("state", "=", "done"),
+        #     ("product_id.type", "=", "product"),
+        # ]
 
     @api.model
     def _map_from_odoo(self, record, parent_record, declaration, index=0):
